@@ -1,0 +1,1 @@
+var myFile = "test stroke";
