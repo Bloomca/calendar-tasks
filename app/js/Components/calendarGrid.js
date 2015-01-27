@@ -18,6 +18,7 @@ define([
 			var topRow = document.createElement('tr');
 			for (var i = 0; i < 7; i++) {
 				var colEl = document.createElement('td');
+				colEl.classList.add('top');
 				colEl.appendChild(document.createTextNode(HEADERS[i]));
 				topRow.appendChild(colEl);
 			}
@@ -37,11 +38,17 @@ define([
 					var td = document.createElement('td');
 					td.setAttribute("data-bind", "click: showFull");
 					td.id = Math.random();
-					td.innerHTML = el;
+					if (el.anotherMonth) {
+						td.classList.add('another-month');
+					}
+					td.innerHTML = '<div class="date-num">' + el.num + '</div>' + 
+						'<ul data-bind="foreach: tasks">' + 
+							'<li><div data-bind="text: title"></div></li>' +
+						'</ul>';
 					listRow.appendChild(td);
 
 					//ko.cleanNode(td);
-					ko.applyBindings(new DayTasks(), td);
+					ko.applyBindings(new DayTasks(null, i, index), td);
 				});
 				newEl.appendChild(listRow);
 			}
@@ -61,20 +68,26 @@ define([
 			startMonth.setDate(-(day-1));
 			var prevMonthDay = startMonth.getDate();
 			for (var i = 0; i < day; i++) {
-				res.push(prevMonthDay++);
+				res.push({
+					num: prevMonthDay++,
+					anotherMonth: true
+				});
 			}
 		}
 
 		// add days of current month
 		var newDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 		for (i = 0; i < newDate.getDate(); i++) {
-			res.push(i+1);
+			res.push({ num: i+1 });
 		}
 
 		// fill last cells
 		var last = res.length % 7;
 		for (i = 0; i < last; i++) {
-			res.push(i+1);
+			res.push({
+				num: i+1,
+				anotherMonth: true
+			});
 		}
 
 		return res;

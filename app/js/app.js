@@ -19,7 +19,7 @@ define([
 		}
 
 		this.date = date;
-		this.humanizeDate = MONTHS[date.month];
+		this.humanizeDate = MONTHS[date.month] + " " + date.year;
 
 
 		this.tasks = [];

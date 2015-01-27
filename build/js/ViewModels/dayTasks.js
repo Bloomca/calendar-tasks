@@ -1,1 +1,1 @@
-define(["knockout","ViewModels/tooltip"],function(t,s){function o(o){this.tasks=t.observableArray(o||[]),this.showFull=function(){s.active(this),s.showTooltip(!0),s.tasks=this.tasks}}return o});
+define(["knockout","ViewModels/tooltip"],function(t,s){function o(o,i,l){this.tasks=t.observableArray(o||[]),this.showFull=function(){s.active(this),s.showTooltip(!0),s.tasks.removeAll();for(var t=0;t<this.tasks().length;t++)s.tasks.push(this.tasks()[t]);e.style.left=147*i+"px",e.style.top=120*l+"px"}}var e=document.getElementById("tooltip");return o});

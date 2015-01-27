@@ -9,15 +9,15 @@
 <body>
 	<div id="app">
 		<div id="top-bar">
-			<button><</button>
-			<div data-bind="text: humanizeDate"></div>
-			<button>></button>
+			<button class="button-arrow button-arrow-left"><</button>
+			<div class="date-title" data-bind="text: humanizeDate"></div>
+			<button class="button-arrow button-arrow-right">></button>
 		</div>
 		<table data-bind="calendarGrid: date"></table>
 		<div id="tooltip" data-bind="visible: showTooltip">
 			<ul data-bind="foreach: tasks">
 				<li>
-					<button>X</button>
+					<button data-bind="click: $root.deleteNote">X</button>
 					<h3 data-bind="text: title"></h3>
 					<p data-bind="text: body"></p>
 				</li>

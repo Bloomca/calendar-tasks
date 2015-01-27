@@ -10,10 +10,22 @@ define(['knockout'], function (ko) {
 		this.addNote = function () {
 			var text = this.note();
 			this.note("");
-			this.tasks.push({
+
+			var task = {
 				title: text,
 				body: text
-			});
+			};
+
+			this.tasks.push(task);
+
+			this.active().tasks.push(task);
+		};
+
+		var self = this;
+
+		this.deleteNote = function (note) {
+			self.active().tasks.remove(note);
+			self.tasks.remove(note);
 		};
 	}
 

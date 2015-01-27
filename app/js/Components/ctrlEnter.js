@@ -13,7 +13,6 @@ define(['knockout'], function (ko) {
 
 			function enterHandler (e) {
 				if (e.keyCode === 13) {
-					console.log(value);
 					value(el);
 				}
 			}
