@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sample calendar app</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script src="vendor/require.js" data-main="js/main.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div id="top-bar">
+			<button><</button>
+			<div data-bind="text: humanizeDate"></div>
+			<button>></button>
+		</div>
+		<table data-bind="calendarGrid: date"></table>
+		<div id="tooltip" data-bind="visible: showTooltip">
+			<ul data-bind="foreach: tasks">
+				<li>
+					<button>X</button>
+					<h3 data-bind="text: title"></h3>
+					<p data-bind="text: body"></p>
+				</li>
+			</ul>
+			<textarea placeholder="Ctrl + enter — add note" 
+					  data-bind="ctrlEnter: addNote(), textInput: note"></textarea>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+define(["knockout","ViewModels/tooltip"],function(t,s){function o(o){this.tasks=t.observableArray(o||[]),this.showFull=function(){s.active(this),s.showTooltip(!0),s.tasks=this.tasks}}return o});

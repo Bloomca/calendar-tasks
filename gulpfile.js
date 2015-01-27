@@ -5,13 +5,14 @@ var gulp = require('gulp'),
 	livereload = require('gulp-livereload');
 
 gulp.task('watch', function () {
+	livereload.listen();
 	gulp.watch('app/**/*', ['minify', 'sass', 'copy']);
 });
 
 gulp.task('minify', function () {
 	gulp.src('app/js/**/*.js')
 		.pipe(uglify())
-		.pipe(concat('app.js'))
+		//.pipe(concat('app.js'))
 		.pipe(gulp.dest('build/js'))
 		.pipe(livereload());
 });
@@ -26,7 +27,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('copy', function () {
-	gulp.src(['app/**/*', '!app/js/**/*.js', '!app/**/*.scss'])
+	gulp.src(['app/**/*', '!app/js/**/*.js', '!app/sass/**/*.scss'])
 		.pipe(gulp.dest('build'))
 		.pipe(livereload());
 });

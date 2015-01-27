@@ -1,0 +1,1 @@
+define(["knockout"],function(n){n.bindingHandlers.ctrlEnter={init:function(n,e){function t(t){13===t.keyCode&&(console.log(e),e(n))}n.addEventListener("keydown",function(e){17===e.keyCode&&n.addEventListener("keydown",t)}),n.addEventListener("keyup",function(){n.removeEventListener("keydown",t)})}}});
