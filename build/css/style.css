@@ -4,7 +4,9 @@ body {
 
 #app {
   width: 1025px;
-  margin: 50px auto; }
+  margin: 50px auto;
+  border: 1px solid #CAC9C9;
+  position: relative; }
 
 #top-bar {
   height: 70px;
@@ -17,7 +19,13 @@ body {
   border-radius: 10px;
   width: 23px;
   height: 23px;
-  top: 20px; }
+  top: 20px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s; }
+
+.button-arrow:hover {
+  opacity: 1; }
 
 .date-title {
   text-align: center;
@@ -41,6 +49,15 @@ td {
   border: 1px solid #ccc;
   position: relative;
   vertical-align: top; }
+
+td:first-child {
+  border-left: 0; }
+
+td:last-child {
+  border-right: 0; }
+
+tr:last-child td {
+  border-bottom: 0; }
 
 td.top {
   text-align: center;
@@ -159,4 +176,4 @@ td ul {
   margin-left: auto;
   margin-right: auto; }
   td ul li {
-    margin-bottom: 10px; }
+    margin-bottom: 8px; }

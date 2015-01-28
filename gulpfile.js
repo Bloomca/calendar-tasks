@@ -9,6 +9,7 @@ gulp.task('watch', function () {
 	gulp.watch('app/**/*', ['minify', 'sass', 'copy']);
 });
 
+// treat js files
 gulp.task('minify', function () {
 	gulp.src('app/js/**/*.js')
 		.pipe(uglify())
@@ -17,7 +18,7 @@ gulp.task('minify', function () {
 		.pipe(livereload());
 });
 
-
+// treat sass files
 gulp.task('sass', function () {
 	gulp.src('app/sass/**/*.scss')
 	    .pipe(sass())
@@ -26,6 +27,7 @@ gulp.task('sass', function () {
 	    .pipe(livereload());
 });
 
+// copy other files
 gulp.task('copy', function () {
 	gulp.src(['app/**/*', '!app/js/**/*.js', '!app/sass/**/*.scss'])
 		.pipe(gulp.dest('build'))

@@ -13,8 +13,13 @@ define(['knockout', 'Tasks'], function (ko, tasksStorage) {
 			this.note("");
 			textarea.blur();
 
+			var title = text.split('/n')[0];
+
+			if (title.length > 16) {
+				title = title.slice(0,15) + '...';
+			}
 			var task = {
-				title: text,
+				title: title,
 				body: text
 			};
 
@@ -24,8 +29,6 @@ define(['knockout', 'Tasks'], function (ko, tasksStorage) {
 
 			// TODO DRY here and on delete
 			tasksStorage[this.active().dateString] = this.active().tasks();
-
-			console.log(tasksStorage);
 
 			updateStorage();
 		};
@@ -50,16 +53,43 @@ define(['knockout', 'Tasks'], function (ko, tasksStorage) {
 		};
 	}
 
+
+	var tooltip = new Tooltip();
+	ko.applyBindings(tooltip, el);
+
+	// hide tooltip if clicked out of #app
+	document.addEventListener('click', function (e) {
+		// if el is hidden we don't have to check
+		if (isHidden(el)) {
+			return;
+		}
+
+		var elem = e.target;
+
+		// otherwise we traverse to parent unless null
+		while (elem) {
+			if (elem === app) {
+				return;
+			}
+			elem = elem.parentNode;
+		}
+
+		// we are here if we aren't in #app
+		tooltip.showTooltip(false);
+	});
+
+	return tooltip;
+
+
+	// function to write to localStorage
 	function updateStorage () {
 		if (localStorage) {
 			localStorage.setItem('calendar-tasks',JSON.stringify(tasksStorage));
 		}
 	}
 
-	var tooltip = new Tooltip();
-	ko.applyBindings(tooltip, el);
-
-	// TODO add fading with clicking outside of #app
-
-	return tooltip;
+	// hidden elements have no width & height, it's a general check
+	function isHidden (elem) {
+		return !elem.offsetWidth && !elem.offsetHeight;
+	}
 });

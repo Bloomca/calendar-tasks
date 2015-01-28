@@ -9,9 +9,9 @@
 <body>
 	<div id="app">
 		<div id="top-bar">
-			<button class="button-arrow button-arrow-left"><</button>
+			<button class="button-arrow button-arrow-left" data-bind="click: downMonth"><</button>
 			<div class="date-title" data-bind="text: humanizeDate"></div>
-			<button class="button-arrow button-arrow-right">></button>
+			<button class="button-arrow button-arrow-right" data-bind="click: upMonth">></button>
 		</div>
 		<table data-bind="calendarGrid: date"></table>
 		<div id="tooltip" data-bind="visible: showTooltip">
