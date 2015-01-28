@@ -120,7 +120,8 @@ define([
 		}
 
 		// fill last cells with next month's days
-		var last = res.length % 7,
+		var numOfWeeks = Math.floor(res.length / 7),
+			last = 7 * (numOfWeeks+1) - res.length,
 			nextMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 		for (i = 0; i < last; i++) {
 			res.push({
