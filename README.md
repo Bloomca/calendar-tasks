@@ -3,6 +3,8 @@ Test app with knockout &amp;&amp; gulp.
 You can add infinite number of notes to each day and they are persistent between sessions. Navigation by months is available, though app doesn't have router, so hash navigation doesn't work.
 This app is deployed at [github pages](http://bloomca.github.io/calendar-tasks/).
 
+App was developed in edge stable Chrome.
+
 ## Problems
 1. tests have to be added
 1. this app has not pixel-perfect layout (photoshop isn't available for me right now)
