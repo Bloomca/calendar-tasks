@@ -4,6 +4,7 @@ You can add infinite number of notes to each day and they are persistent between
 This app is deployed at [github pages](http://bloomca.github.io/calendar-tasks/).
 
 ## Problems
+1. tests have to be added
 1. this app has not pixel-perfect layout (photoshop isn't available for me right now)
 2. some obvious things aren't present (like infinite height of tooltip without scroll)
 3. app design have some problems (some functions aren't optimised)
