@@ -1,7 +1,8 @@
 define([
 	'knockout',
-	'ViewModels/dayTasks'
-], function(ko, DayTasks) {
+	'ViewModels/dayTasks',
+	'Tasks'
+], function(ko, DayTasks, tasksStorage) {
 
 	var HEADERS = "SUN MON TUES WEN THU FRI SAT".split(' ');
 
@@ -34,7 +35,7 @@ define([
 				var listRow = document.createElement('tr');
 				var offset = index++ * 7; 
 				var row = calendar.slice(offset, offset + 7);
-				row.forEach(function (el) {
+				row.forEach(function (el, i) {
 					var td = document.createElement('td');
 					td.setAttribute("data-bind", "click: showFull");
 					td.id = Math.random();
@@ -42,13 +43,15 @@ define([
 						td.classList.add('another-month');
 					}
 					td.innerHTML = '<div class="date-num">' + el.num + '</div>' + 
+						'<div class="events-number" ' + 
+							 'data-bind="text: eventsNumber, visible: tasks().length > 3"></div>' + 
 						'<ul data-bind="foreach: tasks">' + 
-							'<li><div data-bind="text: title"></div></li>' +
+							'<li class="item"><div data-bind="text: title"></div></li>' +
 						'</ul>';
 					listRow.appendChild(td);
 
 					//ko.cleanNode(td);
-					ko.applyBindings(new DayTasks(null, i, index), td);
+					ko.applyBindings(new DayTasks(tasksStorage[el.date], el.date, i, index), td);
 				});
 				newEl.appendChild(listRow);
 			}
@@ -60,8 +63,10 @@ define([
 	function createCalendar (date) {
 		var res = [];
  
-		var startMonth = date;
-		var day = startMonth.getDay();
+		var startMonth = new Date(+date);
+		var day = startMonth.getDay(),
+			curMonth = date.getMonth(),
+			curDate = date.getFullYear() + '-' + curMonth + '-';
 
 		// add starting days
 		if (day) {
@@ -69,7 +74,8 @@ define([
 			var prevMonthDay = startMonth.getDate();
 			for (var i = 0; i < day; i++) {
 				res.push({
-					num: prevMonthDay++,
+					num: prevMonthDay,
+					date: startMonth.getFullYear() + '-' + startMonth.getMonth() + '-' + prevMonthDay++,
 					anotherMonth: true
 				});
 			}
@@ -78,14 +84,19 @@ define([
 		// add days of current month
 		var newDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 		for (i = 0; i < newDate.getDate(); i++) {
-			res.push({ num: i+1 });
+			res.push({ 
+				num: i+1,
+				date: curDate + (i+1)
+			});
 		}
 
 		// fill last cells
-		var last = res.length % 7;
+		var last = res.length % 7,
+			nextMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 		for (i = 0; i < last; i++) {
 			res.push({
 				num: i+1,
+				date: nextMonth.getFullYear() + '-' + nextMonth.getMonth() + '-' + (i+1),
 				anotherMonth: true
 			});
 		}

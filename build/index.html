@@ -16,9 +16,11 @@
 		<table data-bind="calendarGrid: date"></table>
 		<div id="tooltip" data-bind="visible: showTooltip">
 			<ul data-bind="foreach: tasks">
-				<li>
-					<button data-bind="click: $root.deleteNote">X</button>
-					<h3 data-bind="text: title"></h3>
+				<li class="">
+					<span class="close" data-bind="click: $root.deleteNote">X</span>
+					<h3 class="item" data-bind="click: $root.toggleNote">
+						<div data-bind="text: title"></div>
+					</h3>
 					<p data-bind="text: body"></p>
 				</li>
 			</ul>

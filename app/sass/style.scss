@@ -8,6 +8,7 @@ body {
 
 #app {
 	width: 1025px;
+	margin: 50px auto;
 }
 
 #top-bar {
@@ -50,6 +51,7 @@ td {
 	height: 120px;
 	border: 1px solid #ccc;
 	position: relative;
+	vertical-align: top;
 }
 
 td.top {
@@ -59,6 +61,7 @@ td.top {
 	font-size: 12px;
 	color: #8991a2;
 	background: linear-gradient(to bottom, #dcdee3, #d1d4db);
+	vertical-align: middle;
 }
 
 td.another-month {
@@ -73,33 +76,56 @@ td.another-month {
 	font-size: 14px;
 }
 
+.events-number {
+	height: 25px;
+	position: absolute;
+	left: 0;
+	top: 5px;
+	padding-left: 7px;
+	color: #bbb;
+}
+
 td.another-month .date-num {
 	color: #9e9e9e;
 }
 
-td .item {
-	width: 128px;
+.item {
 	height: 23px;
 	position: relative;
 	background: #7793d0;
 	font-size: 12px;
 	font-family: "GenevaCY";
 	color: #fff;
+	border-radius: 5px;
+	vertical-align: middle;
+	padding-left: 10px;
+	div {
+		position: absolute;
+		top: 4px;
+		z-index: 1;
+	}
 }
 
-td .item:after {
+.item:before:not(.active),
+.item:after:not(.active) {
 	content: " ";
 	display: block;
 	height: 11px;
 	width: 100%;
 	position: absolute;
+	border-radius: 5px;
 	left: 0;
 	top: 12px;
 	background: #728dc5;
 }
 
+.item:after:not(.active) {
+	height: 5px;
+	border-radius: 0px;
+}
+
 #tooltip {
-	width: 280px;
+	width: 260px;
 	border: 1px solid #ccc;
 	background: #f7f7f7;
 	padding: 10px;
@@ -114,4 +140,60 @@ td .item:after {
 	background: #fff;
 	border-radius: 5px;
 	border: 1px solid #e8e8e8;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	li {
+		margin-left: 0;
+	}
+}
+
+#tooltip {
+	ul {
+		margin: 10px auto;
+		li {
+			margin-bottom: 10px;
+			color: #fff;
+			position: relative;
+			.active {
+				background: #198ec8;
+			}
+			.close {
+				position: absolute;
+				top: 5px;
+				right: 10px;
+				z-index: 2;
+				font-weight: 700;
+				font-size: 11px;
+				cursor: pointer;
+				opacity: 0.7;
+				:hover {
+					opacity: 1;
+				}
+			}
+			p {
+				color: black;
+				display: none;
+			}
+		}
+	}
+}
+
+#tooltip li h3.active + p {
+	display: block;
+}
+
+td ul {
+	margin-top: 30px;
+	height: 90px;
+	overflow: hidden;
+	width: 135px;
+	margin-left: auto;
+	margin-right: auto;
+	li {
+		margin-bottom: 10px;
+	}
 }

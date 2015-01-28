@@ -1,1 +1,1 @@
-define([],function(){var n={};return n});
+define([],function(){var a=localStorage&&localStorage.getItem("calendar-tasks"),e=a?JSON.parse(a):{};return e});
